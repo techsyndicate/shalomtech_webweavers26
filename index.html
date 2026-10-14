@@ -1,95 +1,297 @@
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riders Avenue</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap"
-      rel="stylesheet"/>
-    <style>
-      * {
-        font-family: "Roboto Condensed", sans-serif;
-      }
-      body {
-        background-color: rgb(255, 255, 255);
-        margin: 0;
-      }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
 
-      .two {
-        background-color: black;
-        color: white;
-        height: 40px;
-        width: 100%;
-        gap: 20px;
-        padding: 10px;
+
+</head>
+
+<style>
+    * {
+        font-family: "Roboto Condensed", sans-serif;
+    }
+
+    body {
+        margin: 0;
+        color: black;
+    }
+
+    .two {
+        background: black;
+        height: 35px;
+        display: flex;
         justify-content: center;
         align-items: center;
+        gap: 35px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
 
+    .five {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+    }
 
-      }
-      .five {
-    margin-top: 10px;
-    margin-right: 50px;
-    text-decoration: none;
-      }
+    .five:hover {
+        color: orange;
+    }
 
-      .three {
-    background-color: red;
-    height: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-      }
+    .three {
+        background: #f2f2f2;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        position: sticky;
+        top: 35px;
+        z-index: 99;
+    }
 
-      .one {
-        width: 100%;
-        height: 70vh;
-        background-image: url("bg.png");
-        background-size: cover;
-        background-position: center;
+    .three h1 {
+        font-size: 13px;
+    }
+
+    .six {
+        color: black;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+        border-bottom: 1px solid;
+    }
+
+    .six:hover {
+        color: grey;
+    }
+
+    .one {
+        height: 75vh;
+        background: url("bg.png") center/cover;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        color: black;
-        font-weight: bolder;
-      }
-      .five{
-        background: none;
-        color: white;
-        border: none;
-        font-size: large;
-      }
-      .six{
-            text-decoration: none;
-            color: black;
-            font-weight: 400;
-      }
-    </style>
-  </head>
-  <body>
+        text-align: center;
+        padding: 30px;
+    }
 
-<div class="two">
-     <a class="five" href="index.html">HOME</a>
-    <a class="five" href="shop.html">SHOP NOW</a>
-    <a class="five" href="shop.html">HYBRIDS</a>
-    <a class="five" href="shop.html">ROADIE</a>
-    <a class="five" href="shop.html">MTB</a>
+    .one h1 {
+        font-size: 55px;
+    }
 
-</div>
-<div class="three">
-    <h1>Click here to register your free ride today</h1>
-    <a class="six" href="register.html">CLICK HERE </a>
-</div>
+    .one p {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .seven, .eight {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+        padding: 40px;
+    }
+
+    .seven .text {
+        width: 40%;
+        text-align: center;
+    }
+
+    .seven img {
+        width: 60%;
+        height: 650px;
+        object-fit: contain;
+    }
+
+    .eight img {
+        width: 55%;
+        height: 500px;
+        object-fit: contain;
+    }
+
+    .eight .text {
+        width: 45%;
+    }
+
+    .seven h1, .eight h1 {
+        font-size: 45px;
+    }
+
+    .seven p, .eight p {
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .nine {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 30px;
+    }
+
+    .nine-text {
+        width: 22%;
+    }
+
+    .nine-text h1 {
+        font-size: 35px;
+    }
+
+    .nine-text p {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    .image-container {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+
+    .image-container img {
+        width: 500px;
+        height: 400px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+        .two {
+            gap: 16px;
+        }
+
+        .five {
+            font-size: 11px;
+        }
+
+        .three {
+            gap: 8px;
+            padding: 5px;
+        }
+
+        .three h1 {
+            font-size: 11px;
+        }
+
+        .six {
+            font-size: 10px;
+        }
+
+        .one {
+            height: 55vh;
+        }
+
+        .one h1 {
+            font-size: 32px;
+        }
+
+        .one p {
+            font-size: 18px;
+        }
+
+        .seven, .eight, .nine {
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .seven .text, .eight .text, .nine-text {
+            width: 100%;
+        }
+
+        .seven h1, .eight h1 {
+            font-size: 32px;
+        }
+
+        .seven p, .eight p {
+            font-size: 17px;
+        }
+
+        .seven img, .eight img {
+            width: 100%;
+            height: auto;
+        }
+
+        .image-container {
+            width: 100%;
+        }
+
+        .image-container img {
+            width: 80vw;
+            height: 300px;
+        }
+    }
+</style>
+
+<body>
+    <div class="two">
+        <a class="five" href="index.html">HOME</a>
+        <a class="five" href="shop.html">SHOP NOW</a>
+        <a class="five" href="shop.html">HYBRIDS</a>
+        <a class="five" href="shop.html">ROADIE</a>
+        <a class="five" href="shop.html">MTB</a>
+    </div>
+
+    <div class="three">
+        <h1>Click here to register your free ride today</h1>
+        <a class="six" href="register.html">CLICK HERE</a>
+    </div>
 
     <div class="one">
-      <h1>WELCOME TO THE <span>RIDERS</span> AVENUE</h1>
-      <p>Get your own MTB, hybrid, roady right now</p>
+        <h1>WELCOME TO THE <span>RIDERS</span> AVENUE</h1>
+        <p>Get your own MTB, hybrid, roady right now</p>
     </div>
-  </body>
+
+    <div class="seven">
+        <div class="text">
+          <center>
+            <h1>Get Up To Get Down</h1>
+            <p>Rhys Ellis is the man at the helm of Apogee Academy—a DH-focused skills coach who spends his year chasing summer. BC May to September, and Australia while Whistler's full of skiers. The days are full, so when the conditions are good, he's up with the sun, coffee on, and ready to ride. The chairlifts don't open until 9, so more often than not, Rhys reaches for the Bullit. They say the early bird gets the worm, and the worm in this case is some perfect autumn trails outside of Whistler's famed bike park. These trails weave through the damp forests that hold the perfect dirt, get less traffic, and have the effort-to-reward ratio that makes them special. We tagged along while Rhys did his thing, and it turns out those early morning alarm clocks really are worth it. The Bullit's 170mm of travel, low-slung weight, and balanced kinematics make taking the high lines a bit easier, and we made it to the top with plenty of battery to spare. Fancy another lap?</p>
+        </div>
+        <img src="img1.png" alt="Mountain bike on a trail">
+        </center>
+    </div>
+<br><br><br><br>
+    <div class="eight">
+        <img src="img2.png" alt="Electric mountain bike">
+        <div class="text">
+            <h1>WATTS STOPPING YOU?</h1>
+            <p>Our 2027 eBikes come stock with a PowerMore Range extender, but for a limited time, when you buy a qualifying 2026 carbon Vala or Bullit and join the Santa Cruz Owners Club, we’ll send you a PowerMore Range Extender, free of charge.</p>
+        </div>
+    </div>
+<br><br><br><br>
+    <div class="nine">
+        <div class="nine-text">
+            <h1>Our Collection</h1>
+            <p>Explore our amazing range of bikes and find the perfect ride for your next adventure. look at more options in the SHOP NOW  area</p>
+        </div>
+
+        <div class="image-container" id="imageContainer">
+            <img src="img4.png" alt="Bike 4">
+            <img src="img5.png" alt="Bike 5">
+            <img src="img6.png" alt="Bike 6">
+            <img src="img7.png" alt="Bike 7">
+            <img src="img8.png" alt="Bike 8">
+            <img src="img9.png" alt="Bike 9">
+            <img src="img10.png" alt="Bike 10">
+        </div>
+    </div>
+    <br><br>
+
+    <div class="copyright">
+      <center>
+        <p1>
+          © 2026 Shashwat Singh. All rights reserved.
+        </p1>
+      </center>
+    </div>
+</body>
 </html>
