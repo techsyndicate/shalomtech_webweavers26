@@ -72,20 +72,31 @@
         color: grey;
     }
 
-    .one {
-        height: 75vh;
-        background: url("bg.png") center/cover;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
-    }
+.one {
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
 
-    .one h1 {
-        font-size: 55px;
-    }
+.one video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.one h1, .one p {
+    position: relative;
+    z-index: 1;
+    color: white;
+}
 
     .one p {
         font-size: 30px;
@@ -244,12 +255,14 @@
         <h1>Click here to register your free ride today</h1>
         <a class="six" href="register.html">CLICK HERE</a>
     </div>
+<div class="one">
+    <video autoplay muted loop playsinline>
+        <source src="bg.mp4" type="video/mp4">
+    </video>
 
-    <div class="one">
-        <h1>WELCOME TO THE <span>RIDERS</span> AVENUE</h1>
-        <p>Get your own MTB, hybrid, roady right now</p>
-    </div>
-
+    <h1>WELCOME TO THE <span>RIDERS</span> AVENUE</h1>
+    <p>Get your own MTB, hybrid, roady right now</p>
+</div>
     <div class="seven">
         <div class="text">
           <center>
