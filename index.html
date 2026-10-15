@@ -141,58 +141,71 @@
         line-height: 1.6;
     }
 
-    .nine {
+ .nine {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 30px;
+    gap: 40px;
+    padding: 50px 70px;
+    box-sizing: border-box;
 }
 
 .nine-text {
-    width: 22%;
+    width: 30%;
+    flex-shrink: 0;
 }
 
 .nine-text h1 {
-    font-size: 35px;
+    font-size: 42px;
+    margin-bottom: 18px;
 }
 
 .nine-text p {
     font-size: 20px;
-    line-height: 1.5;
+    line-height: 1.7;
+    color: #444;
 }
 
 .image-container {
     display: flex;
-    gap: 10px;
+    flex: 1;
+    min-width: 0;
+    gap: 20px;
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 15px 5px 25px;
+    scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: #e00000 #f0f0f0;
+    scrollbar-color: #e00000 #222;
 }
 
 .image-container::-webkit-scrollbar {
-    height: 8px;
+    height: 10px;
 }
 
 .image-container::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
+    background: #222;
+    border-radius: 20px;
+    margin: 0 5px;
+    height: 50px;
 }
 
 .image-container::-webkit-scrollbar-thumb {
-    background: #e00000;
-    border-radius: 10px;
+    background: linear-gradient(90deg, #b30000, #ff2525);
+    border-radius: 20px;
+    border: 2px solid #222;
+    height: 50px;
 }
 
 .image-container::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
+    background: #ff4545;
+    height: 50px;
 }
 
 .image-container img {
-    width: 500px;
+    width: 450px;
     height: 400px;
     object-fit: contain;
     flex-shrink: 0;
+    border-radius: 12px;
 }
 
     @media (max-width: 768px) {
