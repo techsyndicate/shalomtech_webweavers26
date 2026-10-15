@@ -142,38 +142,58 @@
     }
 
     .nine {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        padding: 30px;
-    }
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+}
 
-    .nine-text {
-        width: 22%;
-    }
+.nine-text {
+    width: 22%;
+}
 
-    .nine-text h1 {
-        font-size: 35px;
-    }
+.nine-text h1 {
+    font-size: 35px;
+}
 
-    .nine-text p {
-        font-size: 20px;
-        line-height: 1.5;
-    }
+.nine-text p {
+    font-size: 20px;
+    line-height: 1.5;
+}
 
-    .image-container {
-        display: flex;
-        gap: 10px;
-        overflow-x: auto;
-        padding: 10px 0;
-    }
+.image-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #e00000 #f0f0f0;
+}
 
-    .image-container img {
-        width: 500px;
-        height: 400px;
-        object-fit: contain;
-        flex-shrink: 0;
-    }
+.image-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.image-container::-webkit-scrollbar-thumb {
+    background: #e00000;
+    border-radius: 10px;
+}
+
+.image-container::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+
+.image-container img {
+    width: 500px;
+    height: 400px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
 
     @media (max-width: 768px) {
         .two {
