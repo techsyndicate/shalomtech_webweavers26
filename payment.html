@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Payment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    * {
+        font-family: "Roboto Condensed", sans-serif;
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background-color: #f7f8f9;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .a {
+        width: 100%;
+        max-width: 440px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .b {
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        color: #1a1a1a;
+    }
+
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 6px;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    select {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        outline: none;
+        background-color: #fff;
+    }
+
+    input:focus, select:focus {
+        border-color: #0066cc;
+    }
+
+    .c {
+        border: 1px solid #d9d9d9;
+        border-radius: 8px;
+        padding: 16px;
+        background: #fff;
+        margin-bottom: 16px;
+    }
+
+    .d {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: #1a1a1a;
+    }
+
+    .e {
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 12px;
+    }
+
+    .f {
+        position: relative;
+        border-bottom: 1px solid #d9d9d9;
+    }
+
+    .f input {
+        border: none;
+        border-radius: 0;
+        padding-right: 130px;
+    }
+
+    .g {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: #666;
+        display: flex;
+        gap: 4px;
+    }
+
+    .g span {
+        background: #eee;
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+
+    .h {
+        display: flex;
+    }
+
+    .h input {
+        border: none;
+        border-radius: 0;
+        width: 50%;
+    }
+
+    .h input:first-child {
+        border-right: 1px solid #d9d9d9;
+    }
+
+    .i {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        border: 1px solid #d9d9d9;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 20px;
+        background: #fff;
+    }
+
+    .i input[type="checkbox"] {
+        margin-top: 3px;
+        width: 16px;
+        height: 16px;
+        accent-color: #0066cc;
+    }
+
+    .j strong {
+        display: block;
+        font-size: 14px;
+        color: #1a1a1a;
+    }
+
+    .j span {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .k {
+        width: 100%;
+        height: 48px;
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .k:hover {
+        background-color: #0052a3;
+    }
+
+    .l {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+        font-size: 12px;
+        color: #888;
+    }
+
+    .l a {
+        color: #666;
+        text-decoration: none;
+    }
+
+    .m {
+        display: none;
+        text-align: center;
+
+    }
+
+    .m h1 {
+        font-size: 24px;
+        color: #0066cc;
+
+    }
+
+    .m p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .n {
+        font-weight: bold;
+        color: #635bff;
+    }
+</style>
+
+<body>
+
+    <div class="a">
+        <form id="payment-form" onsubmit="handlePayment(event)">
+            
+            <div class="b" style="margin-top: 0;">Contact information</div>
+            <div style="margin-bottom: 20px;">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="email@example.com" required>
+            </div>
+
+            <div class="b">Payment method</div>
+            
+            <div class="c">
+                <div class="d">
+                    <span></span> Card
+                </div>
+
+                <label>Card information</label>
+                <div class="e">
+                    <div class="f">
+                        <input type="text" placeholder="1234 1234 1234 1234" maxlength="19" required>
+                        <div class="g">
+                            <span>VISA</span>
+                            <span>MC</span>
+                            <span>AMEX</span>
+                        </div>
+                    </div>
+                    <div class="h">
+                        <input type="text" placeholder="MM / YY" maxlength="7" required>
+                        <input type="text" placeholder="CVC" maxlength="4" required>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label>Cardholder name</label>
+                    <input type="text" placeholder="Full name on card" required>
+                </div>
+
+                <div>
+                    <label>Country or region</label>
+                    <select>
+                        <option value="IN">India</option>
+                        <option value="US">United States</option>
+                        <option value="GB">United Kingdom</option>
+                        <option value="CA">Canada</option>
+                        <option value="AU">Australia</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="i">
+                <input type="checkbox" id="save-check">
+                <div class="j">
+                    <label for="save-check" style="margin: 0; cursor: pointer;">
+                        <strong>Save my information for faster checkout</strong>
+                        <span>Pay securely on this site and everywhere Link is accepted.</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="k">Pay</button>
+
+
+        </form>
+
+        <div id="message-screen" class="m">
+            <h1 id="status-heading">Processing Payment...</h1>
+            <p id="status-text">Please wait while we process your secure payment.</p>
+        </div>
+    </div>
+
+    <script>
+        function handlePayment(event) {
+            event.preventDefault();
+
+            document.getElementById('payment-form').style.display = 'none';
+            const messageScreen = document.getElementById('message-screen');
+            const heading = document.getElementById('status-heading');
+            const text = document.getElementById('status-text');
+            messageScreen.style.display = 'block';
+
+            setTimeout(() => {
+                heading.innerText = "Payment Done!";
+                text.innerText = "Redirecting you back to home...";
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 2000);
+
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
