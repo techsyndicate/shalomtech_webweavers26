@@ -46,6 +46,7 @@
 
         input[type="email"],
         input[type="text"],
+        input[type="number"],
         select {
             width: 100%;
             padding: 10px;
@@ -59,6 +60,11 @@
         select:focus {
             border-color: black;
             outline: none;
+        }
+
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
         }
 
         .c {
@@ -196,6 +202,27 @@
                 <input type="email" id="email" placeholder="email@example.com" required>
             </div>
 
+            <div class="b">Select your cycle</div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="cycle-select">Choose cycle type</label>
+                <select id="cycle-select" onchange="updatePrice()" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="MTB">MTB</option>
+                    <option value="HYBRID">HYBRID</option>
+                    <option value="RODIE">RODIE</option>
+                    <option value="FIXIE">FIXIE</option>
+                    <option value="ENDURANCE">ENDURANCE</option>
+                </select>
+            </div>
+
+            <div class="b">Payment Amount</div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="amount">Amount (₹)</label>
+                <input type="text" id="amount" placeholder="Amount will appear here" readonly required>
+            </div>
+
             <div class="b">Payment method</div>
 
             <div class="c">
@@ -269,8 +296,43 @@
     </div>
 
     <script>
+        function updatePrice() {
+            const cycle = document.getElementById('cycle-select').value;
+            const amountInput = document.getElementById('amount');
+
+            const prices = {
+                "MTB": "28,999",
+                "HYBRID": "98,999",
+                "RODIE": "39,999",
+                "FIXIE": "99,999",
+                "ENDURANCE": "48,999"
+            };
+
+            if (prices[cycle] !== undefined) {
+                amountInput.value = prices[cycle];
+            }
+        }
+
         function handlePayment(event) {
             event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const cycle = document.getElementById('cycle-select').value;
+            const amount = document.getElementById('amount').value;
+            const now = new Date();
+
+            const newOrder = {
+                email: email,
+                cycle: cycle,
+                amount: amount,
+                date: now.toLocaleDateString(),
+                time: now.toLocaleTimeString()
+            };
+
+            const existingOrders = JSON.parse(localStorage.getItem('ordersList')) || [];
+            existingOrders.push(newOrder);
+
+            localStorage.setItem('ordersList', JSON.stringify(existingOrders));
 
             document.getElementById('payment-form').style.display = 'none';
 
@@ -282,13 +344,13 @@
 
             setTimeout(() => {
                 heading.innerText = "Payment Done!";
-                text.innerText = "Redirecting you back to home...";
+                text.innerText = "Redirecting to your order summary...";
 
                 setTimeout(() => {
-                    window.location.href = "index.html";
+                    window.location.href = "oder.html";
                 }, 2000);
 
-            }, 5000);
+            }, 3000);
         }
     </script>
 
