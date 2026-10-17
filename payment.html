@@ -47,6 +47,7 @@
         input[type="email"],
         input[type="text"],
         input[type="number"],
+        textarea,
         select {
             width: 100%;
             padding: 10px;
@@ -56,7 +57,13 @@
             background-color: white;
         }
 
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
         input:focus,
+        textarea:focus,
         select:focus {
             border-color: black;
             outline: none;
@@ -202,17 +209,24 @@
                 <input type="email" id="email" placeholder="email@example.com" required>
             </div>
 
+            <div class="b">Delivery Address</div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="address">Full Address</label>
+                <textarea id="address" placeholder="House/Flat No., Street, Area, City, Pincode" required></textarea>
+            </div>
+
             <div class="b">Select your cycle</div>
 
             <div style="margin-bottom: 20px;">
                 <label for="cycle-select">Choose cycle type</label>
                 <select id="cycle-select" onchange="updatePrice()" required>
                     <option value="" disabled selected>Select an option</option>
-                    <option value="MTB">MTB</option>
-                    <option value="HYBRID">HYBRID</option>
-                    <option value="RODIE">RODIE</option>
-                    <option value="FIXIE">FIXIE</option>
-                    <option value="ENDURANCE">ENDURANCE</option>
+                    <option value="MTB">MTB ST20</option>
+                    <option value="HYBRID">RIVERSIDE 500</option>
+                    <option value="RODIE">RODIE RC 120</option>
+                    <option value="FIXIE">FIXIE RC 150</option>
+                    <option value="ENDURANCE">ENDURANCE EXPL 40</option>
                 </select>
             </div>
 
@@ -317,12 +331,14 @@
             event.preventDefault();
 
             const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
             const cycle = document.getElementById('cycle-select').value;
             const amount = document.getElementById('amount').value;
             const now = new Date();
 
             const newOrder = {
                 email: email,
+                address: address,
                 cycle: cycle,
                 amount: amount,
                 date: now.toLocaleDateString(),

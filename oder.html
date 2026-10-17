@@ -7,24 +7,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
 
-
     <title>Order Summary</title>
 
     <style>
         * {
-
             box-sizing: border-box;
             color: black;
         }
 
         body {
             margin: 0;
-             font-family: "Roboto Condensed", sans-serif;
+            font-family: "Roboto Condensed", sans-serif;
         }
 
         .card {
             width: 100%;
-            max-width: 850px;
+            max-width: 950px;
             background-color: white;
             padding: 30px;
             border: 1px solid lightgray;
@@ -108,102 +106,114 @@
         .btn-clear:hover {
             background-color: #c9302c;
         }
-         .two {
-        background: black;
-        height: 35px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 35px;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
 
-    .five {
-        color: white;
-        text-decoration: none;
-        font-size: 14px;
-    }
+        .two {
+            background: black;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .five:hover {
-        color: orange;
-    }
+        .five {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-    .three {
-        background: #f2f2f2;
-        height: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        position: sticky;
-        top: 35px;
-        z-index: 99;
-    }
+        .five:hover {
+            color: orange;
+        }
 
-    .three h1 {
-        font-size: 13px;
-    }
+        .three {
+            background: #f2f2f2;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 35px;
+            z-index: 99;
+        }
 
-    .six {
-        color: black;
-        text-decoration: none;
-        font-size: 12px;
-        font-weight: bold;
-        border-bottom: 1px solid;
-    }
+        .three h1 {
+            font-size: 13px;
+        }
 
-    .six:hover {
-        color: grey;
-    }
+        .six {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            border-bottom: 1px solid;
+        }
+
+        .six:hover {
+            color: grey;
+        }
     </style>
 </head>
 
 <body>
-     <div class="two">
+    <div class="two">
         <a class="five" href="index.html">HOME</a>
         <a class="five" href="shop.html">SHOP NOW</a>
         <a class="five" href="oder.html">ORDERS</a>
-
     </div>
 
     <div class="three">
         <h1>Click here to register your free ride today</h1>
         <a class="six" href="register.html">CLICK HERE</a>
     </div>
-<br>
-<br>
-<center>
-    <div class="card">
-        <h2>Order Details</h2>
 
-        <div class="order-headers">
-            <div class="col">Email</div>
-            <div class="col">Bike</div>
-            <div class="col">Amount</div>
-            <div class="col">Date</div>
-            <div class="col">Time</div>
-            <div class="col">Expected Delivery</div>
-        </div>
+    <br><br>
 
-        <div class="orders-container" id="orders-container">
-        </div>
+    <center>
+        <div class="card">
+            <h2>Order Details</h2>
 
-        <div class="btn-group">
-            <a href="index.html" class="btn">Home</a>
-            <button onclick="clearOrders()" class="btn btn-clear">Clear History</button>
+            <div class="order-headers">
+                <div class="col">Email</div>
+                <div class="col">Delivery Address</div>
+                <div class="col">Bike</div>
+                <div class="col">Amount</div>
+                <div class="col">Date</div>
+                <div class="col">Time</div>
+                <div class="col">Expected Delivery</div>
+            </div>
+
+            <div class="orders-container" id="orders-container">
+            </div>
+
+            <div class="btn-group">
+                <a href="index.html" class="btn">Home</a>
+                <button onclick="clearOrders()" class="btn btn-clear">Clear History</button>
+            </div>
         </div>
-    </div>
-</center>
+    </center>
+
     <script>
+        const bikeNames = {
+            "MTB": "1. MTB ST20",
+            "ENDURANCE": "2. ENDURANCE EXPL 40",
+            "RODIE": "3. ROADIE RC 120",
+            "ROADIE": "3. ROADIE RC 120",
+            "FIXIE": "4. FIXIE RC 150",
+            "HYBRID": "5. HYBRID RIVERSIDE 500"
+        };
+
         const orders = JSON.parse(localStorage.getItem('ordersList')) || [];
         const container = document.getElementById('orders-container');
 
         if (orders.length === 0) {
             container.innerHTML = '<div style="padding: 20px; color: #888;">No orders found.</div>';
         } else {
-            orders.forEach((order, index) => {
+            orders.forEach((order) => {
                 let deliveryDateStr = 'N/A';
                 
                 if (order.date) {
@@ -214,11 +224,16 @@
                     }
                 }
 
+                // Match cycle name or fallback to original value
+                const cycleKey = order.cycle ? order.cycle.toUpperCase() : '';
+                const displayBike = bikeNames[cycleKey] || order.cycle;
+
                 const row = document.createElement('div');
                 row.className = 'order-row';
                 row.innerHTML = `
                     <div class="col">${order.email}</div>
-                    <div class="col">${index + 1}. ${order.cycle}</div>
+                    <div class="col">${order.address || 'N/A'}</div>
+                    <div class="col">${displayBike}</div>
                     <div class="col">₹${order.amount}</div>
                     <div class="col">${order.date}</div>
                     <div class="col">${order.time}</div>
@@ -236,24 +251,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
