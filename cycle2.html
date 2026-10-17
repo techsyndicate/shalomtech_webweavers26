@@ -133,6 +133,9 @@
 
     .i {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .j {
@@ -140,6 +143,23 @@
         height: auto;
         border-radius: 8px;
         object-fit: cover;
+    }
+
+    .gallery-thumbnails {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .gallery-thumbnails img {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 6px;
+        cursor: pointer;
+        border: 2px solid #ddd;
     }
 
     .k {
@@ -231,7 +251,13 @@
 
     <div class="h">
         <div class="i">
-            <img src="img6.png" alt="Rockrider Explore 40" class="j">
+            <img src="img6.png" alt="Rockrider Explore 40" class="j" id="mainImage">
+            <div class="gallery-thumbnails">
+                <img src="img6.png" alt="Main View" onclick="changeImage('img6.png')">
+                <img src="img14.png" alt="Pic 14" onclick="changeImage('img14.png')">
+                <img src="img15.png" alt="Pic 15" onclick="changeImage('img15.png')">
+                <img src="img16.png" alt="Pic 16" onclick="changeImage('img16.png')">
+            </div>
         </div>
         
         <div class="k">
@@ -244,7 +270,6 @@
             
             <div class="n">
                 <span class="o">₹39,999</span>
-
             </div>
             
             <div class="r">
@@ -260,5 +285,11 @@
         <p>© 2026 Shashwat Singh. All rights reserved.</p>
       </center>
     </div>
+
+    <script>
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }
+    </script>
 </body>
 </html>
