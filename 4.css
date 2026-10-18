@@ -1,0 +1,108 @@
+
+    * {
+        font-family: "Roboto Condensed", sans-serif;
+    }
+
+    body {
+        margin: 0;
+        color: black;
+    }
+
+    .two {
+        background: black;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 35px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .five {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .five:hover {
+        color: orange;
+    }
+
+    .three {
+        background: #f2f2f2;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        position: sticky;
+        top: 35px;
+        z-index: 99;
+    }
+
+    .three h1 {
+        font-size: 13px;
+    }
+
+    .six {
+        color: black;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+        border-bottom: 1px solid;
+    }
+
+    .six:hover {
+        color: grey;
+    }
+.one {
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.one video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.one h1, .one p {
+    position: relative;
+    color: white;
+    font-size: 90px;
+    font-weight: 900;
+}
+
+    .one p {
+        font-size: 30px;
+        font-weight: bold;
+    }
+.meow{
+    padding: 40px;
+    margin: 50px;
+    width: 60%;
+    height: 30%px;
+    font-size: 20px;
+}
+.otp{
+    height: 75px;
+    width: 250px;
+    border-radius: 20px;
+    box-shadow: 3px solid black;
+    border: none;
+    background-color:  #da0505;;
+    color: white;
+    font-weight: 1000;
+    font-size: large;
+}

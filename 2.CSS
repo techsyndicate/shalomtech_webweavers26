@@ -1,0 +1,147 @@
+
+        * {
+            box-sizing: border-box;
+            color: black;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Roboto Condensed", sans-serif;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 950px;
+            background-color: white;
+            padding: 30px;
+            border: 1px solid lightgray;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 10px;
+        }
+
+        .order-headers {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333333;
+            margin-bottom: 15px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #555555;
+            text-transform: uppercase;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eeeeee;
+            gap: 15px;
+        }
+
+        .order-row:last-child {
+            border-bottom: none;
+        }
+
+        .col {
+            flex: 1;
+            word-break: break-word;
+            font-size: 14px;
+        }
+
+        .orders-container {
+            margin-bottom: 25px;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #333333;
+        }
+
+        .btn-clear {
+            background-color: #d9534f;
+        }
+
+        .btn-clear:hover {
+            background-color: #c9302c;
+        }
+
+        .two {
+            background: black;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .five {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .five:hover {
+            color: orange;
+        }
+
+        .three {
+            background: #f2f2f2;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 35px;
+            z-index: 99;
+        }
+
+        .three h1 {
+            font-size: 13px;
+        }
+
+        .six {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            border-bottom: 1px solid;
+        }
+
+        .six:hover {
+            color: grey;
+        }
