@@ -74,7 +74,7 @@
                 if (order.date) {
                     const orderDate = new Date(order.date);
                     if (!isNaN(orderDate)) {
-                        orderDate.setDate(orderDate.getDate() + 7);
+                        orderDate.setDate(orderDate.getDate() + 1);
                         deliveryDateStr = orderDate.toLocaleDateString();
                     }
                 }
