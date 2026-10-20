@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Registration</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f7f9fa;
+      color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: #ffffff;
+      border: 1px solid #e1e4e8;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .sub-status {
+      display: none;
+      background-color: #e6f4ea;
+      border: 1px solid #ceead6;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .sub-status.active {
+      display: block;
+    }
+
+    .sub-status h3 {
+      color: #137333;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .sub-status p {
+      color: #1e8e3e;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #000;
+    }
+
+    .field-group {
+      margin-bottom: 16px;
+    }
+
+    .field-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease;
+      background-color: #fff;
+    }
+
+    input:focus, select:focus {
+      border-color: #000;
+    }
+
+    input[readonly] {
+      background-color: #eef1f5;
+      color: #555;
+      cursor: not-allowed;
+    }
+
+    .card-box {
+      border: 1px solid #e1e4e8;
+      border-radius: 8px;
+      padding: 16px;
+      background-color: #fff;
+    }
+
+    .card-number-wrapper {
+      position: relative;
+    }
+
+    .card-brands {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 4px;
+    }
+
+    .brand-tag {
+      font-size: 10px;
+      font-weight: bold;
+      background: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 3px;
+      color: #555;
+    }
+
+    .card-grid {
+      display: flex;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .card-grid input {
+      border: none;
+      border-radius: 0;
+    }
+
+    .card-grid .top-input {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .card-grid .half-input {
+      width: 50%;
+    }
+
+    .card-grid .half-input:first-child {
+      border-right: 1px solid #ccc;
+    }
+
+    .pay-btn {
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .pay-btn:hover {
+      background-color: #222;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .progress-bar-bg {
+      width: 200px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: #fff;
+      transition: width 0.1s linear;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div id="subscriptionStatus" class="sub-status">
+      <h3>Active Subscription</h3>
+      <p id="daysRemainingText">Loading subscription status...</p>
+    </div>
+
+    <form id="paymentForm">
+      <div class="section">
+        <h2>Contact information</h2>
+        <div class="field-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="John Doe" required>
+        </div>
+        <div class="field-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="email@example.com" required>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Payment Amount</h2>
+        <div class="field-group">
+          <label for="paymentAmount">Amount (₹)</label>
+          <input type="text" id="paymentAmount" value="₹ 1000 / month" readonly>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Payment method</h2>
+        <div class="card-box">
+          <label>Card</label>
+          <div class="field-group">
+            <label style="font-size: 12px; color: #666;">Card information</label>
+            <div style="border: 1px solid #ccc; border-radius: 6px; overflow: hidden;">
+              <div class="card-number-wrapper">
+                <input type="text" id="cardNumber" class="top-input" placeholder="1234 1234 1234 1234" maxlength="19" required>
+                <div class="card-brands">
+                  <span class="brand-tag">VISA</span>
+                  <span class="brand-tag">MC</span>
+                  <span class="brand-tag">AMEX</span>
+                </div>
+              </div>
+              <div style="display: flex;">
+                <input type="text" id="cardExpiry" class="half-input" placeholder="MM / YY" maxlength="5" required>
+                <input type="text" id="cardCvc" class="half-input" placeholder="CVC" maxlength="4" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="cardHolder">Cardholder name</label>
+            <input type="text" id="cardHolder" placeholder="Full name on card" required>
+          </div>
+
+          <div class="field-group">
+            <label for="country">Country or region</label>
+            <select id="country">
+              <option value="India" selected>India</option>
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="pay-btn">Pay</button>
+    </form>
+  </div>
+
+  <div id="loadingOverlay" class="overlay">
+    <div class="spinner"></div>
+    <h2 style="font-size: 20px; font-weight: 500;">Buying subscription...</h2>
+    <div class="progress-bar-bg">
+      <div id="progressFill" class="progress-bar-fill"></div>
+    </div>
+  </div>
+
+  <script>
+    function checkExistingSubscription() {
+      const subExpiry = localStorage.getItem('cycleSubExpiry');
+      const statusDiv = document.getElementById('subscriptionStatus');
+      const daysText = document.getElementById('daysRemainingText');
+
+      if (subExpiry) {
+        const expiryDate = new Date(subExpiry);
+        const currentDate = new Date();
+        const diffTime = expiryDate - currentDate;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays > 0) {
+          statusDiv.classList.add('active');
+          daysText.textContent = `You have ${diffDays} day(s) left on your active subscription.`;
+        } else {
+          statusDiv.classList.add('active');
+          statusDiv.style.backgroundColor = '#fce8e6';
+          statusDiv.style.borderColor = '#fad2cf';
+          daysText.style.color = '#c5221f';
+          daysText.textContent = 'Your subscription has expired. Please renew below.';
+        }
+      }
+    }
+
+    document.getElementById('cardNumber').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '');
+      value = value.replace(/(.{4})/g, '$1 ').trim();
+      e.target.value = value.substring(0, 19);
+    });
+
+    document.getElementById('cardExpiry').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length >= 2) {
+        value = value.substring(0, 2) + ' / ' + value.substring(2, 4);
+      }
+      e.target.value = value.substring(0, 7);
+    });
+
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const overlay = document.getElementById('loadingOverlay');
+      const progressFill = document.getElementById('progressFill');
+      overlay.classList.add('active');
+
+      const expiryDate = new Date();
+      expiryDate.setDate(expiryDate.getDate() + 30);
+      localStorage.setItem('cycleSubExpiry', expiryDate.toISOString());
+
+      let startTime = null;
+      const duration = 5000;
+
+      function animateProgress(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min((elapsed / duration) * 100, 100);
+        progressFill.style.width = progress + '%';
+
+        if (elapsed < duration) {
+          requestAnimationFrame(animateProgress);
+        } else {
+          window.location.href = 'index.html';
+        }
+      }
+
+      requestAnimationFrame(animateProgress);
+    });
+
+    window.addEventListener('DOMContentLoaded', checkExistingSubscription);
+  </script>
+</body>
+</html>
