@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +10,99 @@
 
     <title>Order Summary</title>
 
-   
-
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+        .order-wrapper {
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+        .product-preview-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background-color: #ffffff;
+            padding: 12px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        .product-preview-box img {
+            width: 90px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 5px;
+            background: #fff;
+            padding: 4px;
+            border: 1px solid #e0e0e0;
+        }
+        .product-preview-details {
+            text-align: left;
+        }
+        .product-preview-title {
+            font-size: 0.8em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .product-preview-name {
+            font-size: 1.05em;
+            font-weight: bold;
+            color: #222;
+        }
+        .progress-section {
+            width: 100%;
+            padding: 15px 0 10px 0;
+            background-color: #f9f9f9;
+        }
+        .progress-track-wrapper {
+            position: relative;
+            width: 85%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+        .progress-bar-container {
+            position: relative;
+            flex-grow: 1;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 12px;
+            margin-right: 15px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        .cycle-icon {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: left 0.5s ease;
+            z-index: 2;
+        }
+        .home-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        .progress-text {
+            font-size: 0.85em;
+            margin-top: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +130,7 @@
                 <div class="col">Amount</div>
                 <div class="col">Date</div>
                 <div class="col">Time</div>
-                <div class="col">Expected Delivery</div>
+                <div class="col">Expected / Actual Delivery</div>
             </div>
 
             <div class="orders-container" id="orders-container">
@@ -62,41 +153,110 @@
             "HYBRID": "5. HYBRID RIVERSIDE 500"
         };
 
+        const bikeImages = {
+            "MTB": "img5.png",
+            "ENDURANCE": "img7.png",
+            "RODIE": "img6.png",
+            "ROADIE": "img6.png",
+            "FIXIE": "img8.png",
+            "HYBRID": "img9.png"
+        };
+
         const orders = JSON.parse(localStorage.getItem('ordersList')) || [];
         const container = document.getElementById('orders-container');
 
-        if (orders.length === 0) {
-            container.innerHTML = '<div style="padding: 20px; color: #888;">No orders found.</div>';
-        } else {
+        function updateProgressBars() {
+            container.innerHTML = '';
+
+            if (orders.length === 0) {
+                container.innerHTML = '<div style="padding: 20px; color: #888;">No orders found.</div>';
+                return;
+            }
+
+            const now = new Date().getTime();
+
             orders.forEach((order) => {
-                let deliveryDateStr = 'N/A';
-                
-                if (order.date) {
-                    const orderDate = new Date(order.date);
-                    if (!isNaN(orderDate)) {
-                        orderDate.setDate(orderDate.getDate() + 1);
-                        deliveryDateStr = orderDate.toLocaleDateString();
+                let deliveryTimeStr = '30 Mins';
+                let progressPercent = 0;
+                let statusText = '';
+
+                let orderTimestamp = now;
+                if (order.date && order.time) {
+                    const parsedDate = new Date(`${order.date} ${order.time}`);
+                    if (!isNaN(parsedDate.getTime())) {
+                        orderTimestamp = parsedDate.getTime();
                     }
                 }
 
+                const totalDuration = 30 * 60 * 1000;
+                const deliveryTimestamp = orderTimestamp + totalDuration;
+                const timePassed = now - orderTimestamp;
+                const timeRemaining = deliveryTimestamp - now;
+
+                const delDate = new Date(deliveryTimestamp);
+                
+                const formattedTime = delDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const formattedDate = delDate.toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' });
+                const formattedFullDateTime = `${delDate.toLocaleDateString([], { day: '2-digit', month: 'short' })}, ${formattedTime}`;
+
+                if (timeRemaining <= 0) {
+                    progressPercent = 100;
+                    deliveryTimeStr = formattedFullDateTime;
+                    statusText = `Delivered on ${formattedDate} at ${formattedTime}`;
+                } else if (timePassed < 0) {
+                    progressPercent = 0;
+                    deliveryTimeStr = formattedTime;
+                    statusText = 'Order Placed';
+                } else {
+                    progressPercent = Math.min(100, Math.max(0, (timePassed / totalDuration) * 100));
+                    deliveryTimeStr = formattedTime;
+                    const minsLeft = Math.ceil(timeRemaining / (1000 * 60));
+                    statusText = `Delivery Progress: ${minsLeft} mins remaining`;
+                }
 
                 const cycleKey = order.cycle ? order.cycle.toUpperCase() : '';
-                const displayBike = bikeNames[cycleKey] || order.cycle;
+                const displayBike = bikeNames[cycleKey] || order.cycle || 'N/A';
+                const productImage = bikeImages[cycleKey] || 'cycle67.png';
 
-                const row = document.createElement('div');
-                row.className = 'order-row';
-                row.innerHTML = `
-                    <div class="col">${order.email}</div>
-                    <div class="col">${order.address || 'N/A'}</div>
-                    <div class="col">${displayBike}</div>
-                    <div class="col">₹${order.amount}</div>
-                    <div class="col">${order.date}</div>
-                    <div class="col">${order.time}</div>
-                    <div class="col">${deliveryDateStr}</div>
+                const wrapper = document.createElement('div');
+                wrapper.className = 'order-wrapper';
+
+                wrapper.innerHTML = `
+                    <div class="order-row">
+                        <div class="col">${order.email || 'N/A'}</div>
+                        <div class="col">${order.address || 'N/A'}</div>
+                        <div class="col">${displayBike}</div>
+                        <div class="col">₹${order.amount || '0'}</div>
+                        <div class="col">${order.date || 'N/A'}</div>
+                        <div class="col">${order.time || 'N/A'}</div>
+                        <div class="col">${deliveryTimeStr}</div>
+                    </div>
+
+                    <div class="product-preview-box">
+                        <img src="${productImage}" alt="${displayBike}">
+                        <div class="product-preview-details">
+                            <div class="product-preview-title">Your Ordered Product</div>
+                            <div class="product-preview-name">${displayBike}</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-track-wrapper">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: ${progressPercent.toFixed(1)}%;"></div>
+                                <img src="cycle67.png" alt="Bike" class="cycle-icon" style="left: ${progressPercent.toFixed(1)}%;">
+                            </div>
+                            <img src="house67.png" alt="House" class="home-icon">
+                        </div>
+                        <div class="progress-text">${statusText}</div>
+                    </div>
                 `;
-                container.appendChild(row);
+                container.appendChild(wrapper);
             });
         }
+
+        updateProgressBars();
+        setInterval(updateProgressBars, 10000);
 
         function clearOrders() {
             localStorage.removeItem('ordersList');
