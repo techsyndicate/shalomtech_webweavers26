@@ -80,7 +80,7 @@
                 <div class="e">
 
                     <div class="f">
-                        <input type="text" class="card-input" placeholder="1234 1234 1234 1234" maxlength="19" required>
+                        <input type="text" class="card-input" placeholder="1234 1234 1234 1234" maxlength="19" oninput="this.value = this.value.replace(/[^0-9\s]/g, '')" required>
 
                         <div class="g">
                             <span>VISA</span>
@@ -91,7 +91,7 @@
 
                     <div class="h">
                         <input type="text" class="card-input" placeholder="MM / YY" maxlength="7" required>
-                        <input type="text" class="card-input" placeholder="CVC" maxlength="4" required>
+                        <input type="text" class="card-input" placeholder="CVC" maxlength="4" oninput="this.value = this.value.replace(/\D/g, '')" required>
                     </div>
 
                 </div>
