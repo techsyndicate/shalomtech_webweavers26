@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="3.css">
-    <title>Checkout  Payment</title>
+    <title>Checkout Payment</title>
 </head>
 
 <body>
@@ -38,6 +38,7 @@
                 <select id="cycle-select" onchange="updatePrice()" required>
                     <option value="" disabled selected>Select an option</option>
                     <option value="MTB">MTB ST20</option>
+                    <option value="ST100">ST100</option>
                     <option value="HYBRID">RIVERSIDE 500</option>
                     <option value="RIVERSIDE 120">RIVERSIDE 120</option>
                     <option value="RODIE">RODIE RC 120</option>
@@ -122,6 +123,7 @@
 
             const prices = {
                 "MTB": "28,999",
+                "ST100": "19,999",
                 "HYBRID": "98,999",
                 "RIVERSIDE 120": "99,999",
                 "RODIE": "39,999",
@@ -132,6 +134,7 @@
 
             const images = {
                 "MTB": "img5.png",
+                "ST100": "img50.png",
                 "HYBRID": "img9.png",
                 "RIVERSIDE 120": "img30.png",
                 "RODIE": "img6.png",
