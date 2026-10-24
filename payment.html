@@ -29,6 +29,10 @@
 
             <div class="b">Select your cycle</div>
 
+            <div id="cycle-image-container" style="margin-bottom: 15px; text-align: center; display: none;">
+                <img id="cycle-preview-img" src="" alt="Cycle Preview" style="width: 320px; height: 200px; object-fit: contain; border-radius: 5px; border: 1px solid #ddd; padding: 4px; background: #fff;">
+            </div>
+
             <div style="margin-bottom: 20px;">
                 <label for="cycle-select">Choose cycle type</label>
                 <select id="cycle-select" onchange="updatePrice()" required>
@@ -39,6 +43,7 @@
                     <option value="RODIE">RODIE RC 120</option>
                     <option value="FIXIE">FIXIE RC 150</option>
                     <option value="ENDURANCE">ENDURANCE EXPL 40</option>
+                    <option value="EXPL 10">ROCKRIDER EXPL 10</option>
                 </select>
             </div>
 
@@ -112,6 +117,8 @@
         function updatePrice() {
             const cycle = document.getElementById('cycle-select').value;
             const amountInput = document.getElementById('amount');
+            const previewContainer = document.getElementById('cycle-image-container');
+            const previewImg = document.getElementById('cycle-preview-img');
 
             const prices = {
                 "MTB": "28,999",
@@ -119,11 +126,29 @@
                 "RIVERSIDE 120": "99,999",
                 "RODIE": "39,999",
                 "FIXIE": "99,999",
-                "ENDURANCE": "48,999"
+                "ENDURANCE": "48,999",
+                "EXPL 10": "24,999"
+            };
+
+            const images = {
+                "MTB": "img5.png",
+                "HYBRID": "img9.png",
+                "RIVERSIDE 120": "img30.png",
+                "RODIE": "img6.png",
+                "FIXIE": "img8.png",
+                "ENDURANCE": "img7.png",
+                "EXPL 10": "img40.png"
             };
 
             if (prices[cycle] !== undefined) {
                 amountInput.value = prices[cycle];
+            }
+
+            if (images[cycle]) {
+                previewImg.src = images[cycle];
+                previewContainer.style.display = 'block';
+            } else {
+                previewContainer.style.display = 'none';
             }
         }
 
