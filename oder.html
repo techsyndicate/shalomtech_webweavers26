@@ -150,7 +150,9 @@
             "RODIE": "3. ROADIE RC 120",
             "ROADIE": "3. ROADIE RC 120",
             "FIXIE": "4. FIXIE RC 150",
-            "HYBRID": "5. HYBRID RIVERSIDE 500"
+            "HYBRID": "5. HYBRID RIVERSIDE 500",
+            "RIVERSIDE 120": "6. HYBRID RIVERSIDE 120",
+            "RIVERSIDE120": "6. HYBRID RIVERSIDE 120"
         };
 
         const bikeImages = {
@@ -159,7 +161,9 @@
             "RODIE": "img6.png",
             "ROADIE": "img6.png",
             "FIXIE": "img8.png",
-            "HYBRID": "img9.png"
+            "HYBRID": "img9.png",
+            "RIVERSIDE 120": "img30.png",
+            "RIVERSIDE120": "img30.png"
         };
 
         const orders = JSON.parse(localStorage.getItem('ordersList')) || [];
@@ -217,6 +221,7 @@
                 const cycleKey = order.cycle ? order.cycle.toUpperCase() : '';
                 const displayBike = bikeNames[cycleKey] || order.cycle || 'N/A';
                 const productImage = bikeImages[cycleKey] || 'cycle67.png';
+                const displayAmount = (cycleKey === "RIVERSIDE 120" || cycleKey === "RIVERSIDE120" || cycleKey === "6. HYBRID RIVERSIDE 120") ? "99,999" : (order.amount || '0');
 
                 const wrapper = document.createElement('div');
                 wrapper.className = 'order-wrapper';
@@ -226,7 +231,7 @@
                         <div class="col">${order.email || 'N/A'}</div>
                         <div class="col">${order.address || 'N/A'}</div>
                         <div class="col">${displayBike}</div>
-                        <div class="col">₹${order.amount || '0'}</div>
+                        <div class="col">₹${displayAmount}</div>
                         <div class="col">${order.date || 'N/A'}</div>
                         <div class="col">${order.time || 'N/A'}</div>
                         <div class="col">${deliveryTimeStr}</div>
