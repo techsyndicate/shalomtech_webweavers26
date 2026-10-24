@@ -39,6 +39,9 @@
                     <option value="" disabled selected>Select an option</option>
                     <option value="MTB">MTB ST20</option>
                     <option value="ST100">ST100</option>
+                    <option value="ST50">ROCKRIDER MTB (ST50)</option>
+                    <option value="ST200">ROCKRIDER MTB (ST 200)</option>
+                    <option value="ST30">ROCKRIDER MTB (ST30)</option>
                     <option value="HYBRID">RIVERSIDE 500</option>
                     <option value="RIVERSIDE 120">RIVERSIDE 120</option>
                     <option value="RODIE">RODIE RC 120</option>
@@ -58,7 +61,15 @@
 
             <div class="b">Payment method</div>
 
-            <div class="c">
+            <div style="margin-bottom: 15px;">
+                <label for="payment-method-select">Choose Payment Method</label>
+                <select id="payment-method-select" onchange="togglePaymentMethod()" required>
+                    <option value="card" selected>Card</option>
+                    <option value="cod">Cash on Delivery (COD)</option>
+                </select>
+            </div>
+
+            <div class="c" id="card-fields">
 
                 <div class="d">
                     Card
@@ -69,7 +80,7 @@
                 <div class="e">
 
                     <div class="f">
-                        <input type="text" placeholder="1234 1234 1234 1234" maxlength="19" required>
+                        <input type="text" class="card-input" placeholder="1234 1234 1234 1234" maxlength="19" required>
 
                         <div class="g">
                             <span>VISA</span>
@@ -79,15 +90,15 @@
                     </div>
 
                     <div class="h">
-                        <input type="text" placeholder="MM / YY" maxlength="7" required>
-                        <input type="text" placeholder="CVC" maxlength="4" required>
+                        <input type="text" class="card-input" placeholder="MM / YY" maxlength="7" required>
+                        <input type="text" class="card-input" placeholder="CVC" maxlength="4" required>
                     </div>
 
                 </div>
 
                 <div style="margin-bottom: 12px;">
                     <label>Cardholder name</label>
-                    <input type="text" placeholder="Full name on card" required>
+                    <input type="text" class="card-input" placeholder="Full name on card" required>
                 </div>
 
                 <div>
@@ -104,7 +115,11 @@
 
             </div>
 
-            <button type="submit" class="k">Pay</button>
+            <div id="cod-fields" style="display: none; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; margin-bottom: 15px;">
+                <p style="margin: 0; color: #333; font-weight: 500;">Pay with cash upon delivery of your item.</p>
+            </div>
+
+            <button type="submit" class="k" id="submit-btn">Pay</button>
 
         </form>
 
@@ -125,6 +140,9 @@
             const prices = {
                 "MTB": "28,999",
                 "ST100": "19,999",
+                "ST50": "15,999",
+                "ST200": "16,999",
+                "ST30": "19,999",
                 "HYBRID": "98,999",
                 "RIVERSIDE 120": "99,999",
                 "RODIE": "39,999",
@@ -137,6 +155,9 @@
             const images = {
                 "MTB": "img5.png",
                 "ST100": "img50.png",
+                "ST50": "img70.png",
+                "ST200": "img80.png",
+                "ST30": "img90.png",
                 "HYBRID": "img9.png",
                 "RIVERSIDE 120": "img30.png",
                 "RODIE": "img6.png",
@@ -158,6 +179,26 @@
             }
         }
 
+        function togglePaymentMethod() {
+            const method = document.getElementById('payment-method-select').value;
+            const cardFields = document.getElementById('card-fields');
+            const codFields = document.getElementById('cod-fields');
+            const cardInputs = document.querySelectorAll('.card-input');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (method === 'cod') {
+                cardFields.style.display = 'none';
+                codFields.style.display = 'block';
+                submitBtn.innerText = 'Place Order';
+                cardInputs.forEach(input => input.removeAttribute('required'));
+            } else {
+                cardFields.style.display = 'block';
+                codFields.style.display = 'none';
+                submitBtn.innerText = 'Pay';
+                cardInputs.forEach(input => input.setAttribute('required', 'required'));
+            }
+        }
+
         function handlePayment(event) {
             event.preventDefault();
 
@@ -165,6 +206,7 @@
             const address = document.getElementById('address').value;
             const cycle = document.getElementById('cycle-select').value;
             const amount = document.getElementById('amount').value;
+            const paymentMethod = document.getElementById('payment-method-select').value;
             const now = new Date();
 
             const newOrder = {
@@ -172,6 +214,7 @@
                 address: address,
                 cycle: cycle,
                 amount: amount,
+                paymentMethod: paymentMethod === 'cod' ? 'Cash on Delivery' : 'Card',
                 date: now.toLocaleDateString(),
                 time: now.toLocaleTimeString()
             };
@@ -189,15 +232,25 @@
 
             messageScreen.style.display = 'block';
 
-            setTimeout(() => {
-                heading.innerText = "Payment Done!";
+            if (paymentMethod === 'cod') {
+                heading.innerText = "Order Placed!";
                 text.innerText = "Redirecting to your order summary...";
-
                 setTimeout(() => {
                     window.location.href = "oder.html";
-                }, 2000);
+                }, 1500);
+            } else {
+                heading.innerText = "Processing Payment...";
+                text.innerText = "Please wait while we process your secure payment.";
+                setTimeout(() => {
+                    heading.innerText = "Payment Done!";
+                    text.innerText = "Redirecting to your order summary...";
 
-            }, 3000);
+                    setTimeout(() => {
+                        window.location.href = "oder.html";
+                    }, 2000);
+
+                }, 3000);
+            }
         }
     </script>
 

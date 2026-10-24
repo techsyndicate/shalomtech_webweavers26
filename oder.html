@@ -168,7 +168,11 @@
             "HYBRID": "5. HYBRID RIVERSIDE 500",
             "RIVERSIDE 120": "6. HYBRID RIVERSIDE 120",
             "RIVERSIDE120": "6. HYBRID RIVERSIDE 120",
-            "ST100": "ST100"
+            "ST100": "ST100",
+            "VAN RYSEL RCR-R PRO": "VAN RYSEL RCR-R PRO",
+            "ST50": "ROCKRIDER MTB (ST50)",
+            "ST200": "ROCKRIDER MTB (ST 200)",
+            "ST30": "ROCKRIDER MTB (ST30)"
         };
 
         const bikeImages = {
@@ -182,7 +186,11 @@
             "HYBRID": "img9.png",
             "RIVERSIDE 120": "img30.png",
             "RIVERSIDE120": "img30.png",
-            "ST100": "img50.png"
+            "ST100": "img50.png",
+            "VAN RYSEL RCR-R PRO": "img60.png",
+            "ST50": "img70.png",
+            "ST200": "img80.png",
+            "ST30": "img90.png"
         };
 
         const orders = JSON.parse(localStorage.getItem('ordersList')) || [];
@@ -262,7 +270,13 @@
                     : '';
 
                 const displayBike = bikeNames[cycleKey] || order.cycle || 'N/A';
-                const productImage = bikeImages[cycleKey] || 'cycle67.png';
+
+                let productImage = 'cycle67.png';
+                if (cycleKey.includes("VAN RYSEL")) {
+                    productImage = "img60.png";
+                } else if (bikeImages[cycleKey]) {
+                    productImage = bikeImages[cycleKey];
+                }
 
                 const displayAmount = (
                     cycleKey === "RIVERSIDE 120" ||
