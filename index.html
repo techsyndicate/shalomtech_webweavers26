@@ -1,50 +1,383 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riders Avenue</title>
-    <link rel="stylesheet" href="1.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none !important;
+            text-shadow: none !important;
+            outline: none;
+        }
 
+        :root {
+            --bg-main: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --border-subtle: #E2E5EC;
+            --border-strong: #111318;
+            --text-primary: #111318;
+            --text-muted: #5E6470;
+            --text-subtle: #8C92A0;
+            --accent-pink: #D81B60;
+            --accent-pink-soft: #FCE4EC;
+        }
 
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .two {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-nav);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(8px);
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 32px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .five {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.15s ease;
+        }
+
+        .five:hover, .five.active {
+            color: var(--text-primary);
+        }
+
+        .three {
+            background-color: #111318;
+            color: #FFFFFF;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .three h1 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #D1D5DB;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .six {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background-color: #FFFFFF;
+            color: #111318;
+            padding: 8px 16px;
+            border-radius: 2px;
+            transition: background-color 0.15s ease;
+        }
+
+        .six:hover {
+            background-color: var(--accent-pink-soft);
+            color: var(--accent-pink);
+        }
+
+        .one {
+            position: relative;
+            background-color: #0D0E11;
+            color: #FFFFFF;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 80px 24px;
+        }
+
+        .one video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.45;
+        }
+
+        .one h1, .one p {
+            position: relative;
+            z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto 16px auto;
+            width: 100%;
+        }
+
+        .one h1 {
+            font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+
+        .one h1 span {
+            font-family: 'Caveat', cursive;
+            color: var(--accent-pink);
+            text-transform: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin: 0 4px;
+        }
+
+        .one p {
+            font-size: 1.1rem;
+            color: #A0A5B1;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .seven, .eight, .nine {
+            padding: 96px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .seven {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .seven .text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .seven h1, .eight h1, .nine-text h1 {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .seven p, .eight p, .nine-text p {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .seven img, .eight img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid var(--border-subtle);
+            background-color: var(--bg-card);
+        }
+
+        .eight {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            padding: 64px;
+        }
+
+        .nine-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nine-text h1 {
+            margin-bottom: 8px;
+        }
+
+        .scroll-btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .scroll-btn {
+            width: 44px;
+            height: 44px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .scroll-btn:hover {
+            border-color: var(--border-strong);
+            background-color: var(--accent-pink-soft);
+            color: var(--accent-pink);
+        }
+
+        .image-container {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 16px;
+            scrollbar-width: none;
+        }
+
+        .image-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .bike-card {
+            flex: 0 0 280px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .bike-card:hover {
+            border-color: var(--border-strong);
+        }
+
+        .bike-card img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: contain;
+            background-color: #F8F9FA;
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 16px;
+            padding: 8px;
+        }
+
+        .bike-card h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .copyright {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-subtle);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 900px) {
+            .seven, .eight {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 48px 24px;
+            }
+            .nine-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
-
-
 
 <body>
     <div class="two">
-        <a class="five" href="index.html">HOME</a>
-        <a class="five" href="shop.html">SHOP NOW</a>
-        <a class="five" href="oder.html">ORDERS</a>
+        <div style="flex: 1;"></div>
 
+        <a href="index.html" class="nav-brand">RIDERS AVENUE</a>
+
+        <div class="nav-links" style="flex: 1; justify-content: flex-end;">
+            <a class="five active" href="index.html">HOME</a>
+            <a class="five" href="shop.html">SHOP NOW</a>
+            <a class="five" href="oder.html">ORDERS</a>
+        </div>
     </div>
 
     <div class="three">
         <h1>Click here to register your free ride today</h1>
         <a class="six" href="register.html">CLICK HERE</a>
     </div>
-<div class="one">
-    <video autoplay muted loop playsinline>
-        <source src="bg.mp4" type="video/mp4">
-    </video>
 
-    <h1>WELCOME TO THE <span>RIDERS</span> AVENUE CYCLES IN 30 MINS</h1>
-    <p>Get your own MTB, hybrid, roady right now</p>
-</div>
+    <div class="one">
+        <video autoplay muted loop playsinline>
+            <source src="bg.mp4" type="video/mp4">
+        </video>
+        <h1>WELCOME TO THE <span>RIDERS</span> AVENUE CYCLES IN 30 MINS</h1>
+        <p>Get your own MTB, hybrid, roady right now</p>
+    </div>
+
     <div class="seven">
         <div class="text">
-          <center>
             <h1>Get Up To Get Down</h1>
             <p>Rhys Ellis is the man at the helm of Apogee Academy—a DH-focused skills coach who spends his year chasing summer. BC May to September, and Australia while Whistler's full of skiers. The days are full, so when the conditions are good, he's up with the sun, coffee on, and ready to ride. The chairlifts don't open until 9, so more often than not, Rhys reaches for the Bullit. They say the early bird gets the worm, and the worm in this case is some perfect autumn trails outside of Whistler's famed bike park. These trails weave through the damp forests that hold the perfect dirt, get less traffic, and have the effort-to-reward ratio that makes them special. We tagged along while Rhys did his thing, and it turns out those early morning alarm clocks really are worth it. The Bullit's 170mm of travel, low-slung weight, and balanced kinematics make taking the high lines a bit easier, and we made it to the top with plenty of battery to spare. Fancy another lap?</p>
         </div>
         <img src="img1.png" alt="Mountain bike on a trail">
-        </center>
     </div>
-<br><br><br><br>
+
     <div class="eight">
         <img src="img2.png" alt="Electric mountain bike">
         <div class="text">
@@ -52,37 +385,81 @@
             <p>Our 2027 eBikes come stock with a PowerMore Range extender, but for a limited time, when you buy a qualifying 2026 carbon Vala or Bullit and join the Santa Cruz Owners Club, we’ll send you a PowerMore Range Extender, free of charge.</p>
         </div>
     </div>
-<br><br><br><br>
+
     <div class="nine">
-        <div class="nine-text">
-            <h1>Our Collection</h1>
-            <p>Explore our amazing range of bikes and find the perfect ride for your next adventure. look at more options in the SHOP NOW  area</p>
+        <div class="nine-header">
+            <div class="nine-text">
+                <h1>Our Collection</h1>
+                <p>Explore our amazing range of bikes and find the perfect ride for your next adventure.</p>
+            </div>
+            <div class="scroll-btn-group">
+                <button class="scroll-btn" onclick="scrollCollection(-1)">‹</button>
+                <button class="scroll-btn" onclick="scrollCollection(1)">›</button>
+            </div>
         </div>
 
         <div class="image-container" id="imageContainer">
-            <img src="img5.png" alt="Bike 5">
-            <img src="img6.png" alt="Bike 6">
-            <img src="img7.png" alt="Bike 7">
-            <img src="img8.png" alt="Bike 8">
-            <img src="img9.png" alt="Bike 9">
-             <img src="img40.png" alt="Bike 4">
-            <img src="img50.png" alt="Bike 5">
-            <img src="img60.png" alt="Bike 6">
-            <img src="img70.png" alt="Bike 7">
-            <img src="img80.png" alt="Bike 8">
-            <img src="img90.png" alt="Bike 9">
-            <img src="img30.png" alt="Bike 9">
-            
+            <a href="cycle1.html" class="bike-card">
+                <img src="img5.png" alt="Rockrider EXPL 10 Low Frame">
+                <h3>Rockrider EXPL 10 Low Frame</h3>
+            </a>
+            <a href="cycle2.html" class="bike-card">
+                <img src="img6.png" alt="Rockrider Roadie RC 120">
+                <h3>Rockrider Roadie RC 120</h3>
+            </a>
+            <a href="cycle3.html" class="bike-card">
+                <img src="img7.png" alt="Rockrider Endurance EXPL 40">
+                <h3>Rockrider Endurance EXPL 40</h3>
+            </a>
+            <a href="cycle4.html" class="bike-card">
+                <img src="img8.png" alt="Rockrider Fixie RC 150">
+                <h3>Rockrider Fixie RC 150</h3>
+            </a>
+            <a href="cycle5.html" class="bike-card">
+                <img src="img9.png" alt="Rockrider Riverside 500">
+                <h3>Rockrider Riverside 500</h3>
+            </a>
+            <a href="cycle7.html" class="bike-card">
+                <img src="img40.png" alt="Rockrider EXPL 10 High Frame">
+                <h3>Rockrider EXPL 10 High Frame</h3>
+            </a>
+            <a href="cycle8.html" class="bike-card">
+                <img src="img50.png" alt="Rockrider MTB ST100">
+                <h3>Rockrider MTB ST100</h3>
+            </a>
+            <a href="cycle9.html" class="bike-card">
+                <img src="img60.png" alt="Van Rysel RCR Pro SRAM">
+                <h3>Van Rysel RCR Pro SRAM</h3>
+            </a>
+            <a href="cycle10.html" class="bike-card">
+                <img src="img70.png" alt="Rockrider MTB ST50">
+                <h3>Rockrider MTB ST50</h3>
+            </a>
+            <a href="cycle11.html" class="bike-card">
+                <img src="img80.png" alt="Rockrider MTB ST 200">
+                <h3>Rockrider MTB ST 200</h3>
+            </a>
+            <a href="cycle12.html" class="bike-card">
+                <img src="img90.png" alt="Rockrider MTB ST30">
+                <h3>Rockrider MTB ST30</h3>
+            </a>
+            <a href="cycle6.html" class="bike-card">
+                <img src="img30.png" alt="Rockrider Riverside 120">
+                <h3>Rockrider Riverside 120</h3>
+            </a>
         </div>
     </div>
-    <br><br>
 
     <div class="copyright">
-      <center>
-        <p1>
-          © 2026 Shashwat Singh. All rights reserved.
-        </p1>
-      </center>
+        <p>© 2026 Shashwat Singh. All rights reserved.</p>
     </div>
+
+    <script>
+        function scrollCollection(direction) {
+            const container = document.getElementById('imageContainer');
+            const scrollAmount = 320;
+            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>

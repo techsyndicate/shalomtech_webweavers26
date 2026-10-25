@@ -1,21 +1,257 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riders Avenue</title>
+    <title>ROCKRIDER HYBRID (RIVERSIDE 500) — Riders Avenue</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="12.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none !important;
+            text-shadow: none !important;
+            outline: none;
+        }
+
+        :root {
+            --bg-main: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --border-subtle: #E2E5EC;
+            --border-strong: #111318;
+            --text-primary: #111318;
+            --text-muted: #5E6470;
+            --text-subtle: #8C92A0;
+            --accent-pink: #D81B60;
+            --accent-pink-soft: #FCE4EC;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .a {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-nav);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(8px);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 32px;
+        }
+
+        .b {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.15s ease;
+        }
+
+        .b:hover, .b.active {
+            color: var(--text-primary);
+        }
+
+        .c {
+            background-color: #111318;
+            color: #FFFFFF;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .c h1 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #D1D5DB;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .d {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background-color: #FFFFFF;
+            color: #111318;
+            padding: 8px 16px;
+            border-radius: 2px;
+            transition: background-color 0.15s ease;
+        }
+
+        .d:hover {
+            background-color: var(--accent-pink-soft);
+            color: var(--accent-pink);
+        }
+
+        .h {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            align-items: start;
+        }
+
+        .i {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .j {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: contain;
+            background-color: #F8F9FA;
+            border: 1px solid var(--border-subtle);
+            padding: 16px;
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+        }
+
+        .gallery-thumbnails img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            background-color: #F8F9FA;
+            border: 1px solid var(--border-subtle);
+            padding: 4px;
+            cursor: pointer;
+            transition: border-color 0.15s ease;
+        }
+
+        .gallery-thumbnails img:hover {
+            border-color: var(--border-strong);
+        }
+
+        .k {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .l {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .m {
+            color: var(--text-subtle);
+            font-weight: 600;
+        }
+
+        .k h1 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+        }
+
+        .n {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .o {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-pink);
+            letter-spacing: -0.02em;
+        }
+
+        .r {
+            display: flex;
+            margin-top: 16px;
+        }
+
+        .s {
+            width: 100%;
+            height: 52px;
+            background-color: #111318;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 2px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .s:hover {
+            background-color: var(--accent-pink);
+        }
+
+        .copyright {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-subtle);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+            letter-spacing: 0.05em;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 860px) {
+            .h {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 24px;
+                margin: 20px auto;
+            }
+        }
+    </style>
 </head>
-
-
 
 <body>
     <div class="a">
         <a class="b" href="index.html">HOME</a>
-        <a class="b" href="shop.html">SHOP NOW</a>
+        <a class="b active" href="shop.html">SHOP NOW</a>
         <a class="b" href="oder.html">ORDERS</a>
     </div>
 
@@ -26,7 +262,7 @@
 
     <div class="h">
         <div class="i">
-            <img src="img9.png" alt="Rockrider Explore 40" class="j" id="mainImage">
+            <img src="img9.png" alt="Rockrider Riverside 500" class="j" id="mainImage">
             <div class="gallery-thumbnails">
                 <img src="img9.png" alt="Main View" onclick="changeImage('img9.png')">
                 <img src="img23.png" alt="Pic 23" onclick="changeImage('img23.png')">
@@ -41,27 +277,22 @@
                 <span class="m">ID 8943176</span>
             </div>
             
-            <h1>ROCKRIDER HYRBID CYCLE(RIVERSIDE 500)
-                9GEAR TOP SPEED DISK BRAKES SHIMAO ALTUS GEARS WITH TEKKTRO DISK BRAKES 
-                    25.5INCH WHEEL SIZE
-            </h1>
+            <h1>ROCKRIDER HYBRID CYCLE (RIVERSIDE 500) — 9-GEAR TOP SPEED, DISC BRAKES, SHIMANO ALTUS GEARS WITH TEKTRO DISC BRAKES, 25.5-INCH WHEEL SIZE</h1>
             
             <div class="n">
                 <span class="o">₹98,999</span>
             </div>
             
             <div class="r">
-                <a href="payment.html" style="text-decoration: none; flex: 1; display: flex;">
+                <a href="payment.html" style="text-decoration: none; width: 100%;">
                     <button class="s">BUY NOW</button>
                 </a>
             </div>
         </div>
     </div>
 
-    <div>
-      <center>
+    <div class="copyright">
         <p>© 2026 Shashwat Singh. All rights reserved.</p>
-      </center>
     </div>
 
     <script>

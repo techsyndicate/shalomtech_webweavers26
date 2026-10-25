@@ -1,175 +1,247 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riders Avenue</title>
+    <title>Under 50k — Riders Avenue</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="stylesheet" href="7.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none !important;
+            text-shadow: none !important;
+            outline: none;
+        }
+
+        :root {
+            --bg-main: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --border-subtle: #E2E5EC;
+            --border-strong: #111318;
+            --text-primary: #111318;
+            --text-muted: #5E6470;
+            --text-subtle: #8C92A0;
+            --accent-pink: #D81B60;
+            --accent-pink-soft: #FCE4EC;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .two {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-nav);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(8px);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 32px;
+        }
+
+        .five {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.15s ease;
+        }
+
+        .five:hover, .five.active {
+            color: var(--text-primary);
+        }
+
+        .three {
+            background-color: #111318;
+            color: #FFFFFF;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .three h1 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #D1D5DB;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .six {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background-color: #FFFFFF;
+            color: #111318;
+            padding: 8px 16px;
+            border-radius: 2px;
+            transition: background-color 0.15s ease;
+        }
+
+        .six:hover {
+            background-color: var(--accent-pink-soft);
+            color: var(--accent-pink);
+        }
+
+        .biggest {
+            max-width: 1280px;
+            margin: 40px auto 80px auto;
+            padding: 0 24px;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .left-column {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 24px;
+            position: sticky;
+            top: 88px;
+        }
+
+        .left-column h3 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-link {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 10px 12px;
+            border: 1px solid var(--border-subtle);
+            background-color: var(--bg-main);
+            transition: all 0.15s ease;
+            display: block;
+        }
+
+        .filter-link:hover, .filter-link.active {
+            border-color: var(--border-strong);
+            color: var(--text-primary);
+            background-color: var(--bg-card);
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--border-strong);
+        }
+
+        .product-card a {
+            display: block;
+            aspect-ratio: 4/3;
+            background-color: #F8F9FA;
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .product-card h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.35;
+        }
+
+        .product-card .price {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--accent-pink);
+            letter-spacing: -0.01em;
+            margin-top: auto;
+        }
+
+        .copyright {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-subtle);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+            letter-spacing: 0.05em;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 860px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .left-column {
+                position: static;
+            }
+        }
+    </style>
 </head>
-
-<style>
-    * {
-        font-family: "Roboto Condensed", sans-serif;
-    }
-
-    body {
-        margin: 0;
-        color: black;
-    }
-
-    .two {
-        background: black;
-        height: 35px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 35px;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-
-    .five {
-        color: white;
-        text-decoration: none;
-        font-size: 14px;
-    }
-
-    .five:hover {
-        color: orange;
-    }
-
-    .three {
-        background: #f2f2f2;
-        height: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        position: sticky;
-        top: 35px;
-        z-index: 99;
-    }
-
-    .three h1 {
-        font-size: 13px;
-    }
-
-    .six {
-        color: black;
-        text-decoration: none;
-        font-size: 12px;
-        font-weight: bold;
-        border-bottom: 1px solid;
-    }
-
-    .six:hover {
-        color: grey;
-    }
-
-    .product-container {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    .product-card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 16px;
-        background-color: #fff;
-        width: 250px;
-        font-family: Arial, sans-serif;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .product-card img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 4px;
-    }
-
-    .product-card h3 {
-        font-size: 14px;
-        color: #333;
-        margin: 10px 0;
-    }
-
-    .rating {
-        color: #f39c12;
-        font-size: 13px;
-        margin: 5px 0;
-    }
-
-    .price {
-        font-size: 16px;
-        font-weight: bold;
-        color: #000;
-    }
-
-    .mrp {
-        font-size: 12px;
-        color: #888;
-        text-decoration: line-through;
-        margin-left: 5px;
-        font-weight: normal;
-    }
-
-    .main-layout {
-        display: flex;
-        gap: 20px;
-        font-family: Arial, sans-serif;
-        padding: 20px;
-    }
-
-    .left-column {
-        flex: 0 0 15%;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 16px;
-        background-color: #fff;
-        height: fit-content;
-    }
-
-    .right-column {
-        flex: 1;
-    }
-
-    .filter-link {
-        display: block;
-        color: #333;
-        text-decoration: none;
-        margin-top: 10px;
-        padding: 6px 10px;
-        background-color: #f5f5f5;
-        border-radius: 4px;
-        font-size: 14px;
-    }
-    .filter-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 25px;
-}
-
-.filter-link {
-    display: block;
-    text-align: center;
-}
-.filter-link {
-    display: block;
-    width: 250px;
-    padding: 12px 15px;
-    text-align: center;
-    box-sizing: border-box;
-}
-</style>
 
 <body>
     <div class="two">
@@ -187,11 +259,11 @@
         <div class="main-layout">
             <aside class="left-column">
                 <h3>Filters</h3>
-                <p><a href="30k.html" class="filter-link">under 30,000</a></p>
-                <br>
-                <a href="50k.html" class="filter-link">under 50,000</a>
-                <br>
-                <a href="100k.html" class="filter-link">under 100,000</a>
+                <div class="filter-buttons">
+                    <a href="30k.html" class="filter-link">Under 30,000</a>
+                    <a href="50k.html" class="filter-link active">Under 50,000</a>
+                    <a href="100k.html" class="filter-link">Under 100,000</a>
+                </div>
             </aside>
 
             <main class="right-column">
@@ -199,46 +271,45 @@
                     <div class="product-card">
                         <a href="cycle10.html"><img src="img70.png" alt="Rockrider MTB ST50"></a>
                         <h3>ROCKRIDER MTB (ST50)</h3>
-                        <p class="price">₹15,999 </p>
+                        <p class="price">₹15,999</p>
                     </div>
                     <div class="product-card">
                         <a href="cycle11.html"><img src="img80.png" alt="Rockrider MTB ST 200"></a>
                         <h3>ROCKRIDER MTB (ST 200)</h3>
-                        <p class="price">₹16,999 </p>
+                        <p class="price">₹16,999</p>
                     </div>
                     <div id="expl10" class="product-card">
                         <a href="cycle7.html"><img src="img40.png" alt="Rockrider EXPL 10"></a>
-                        <h3>ROCKRIDER MTB(EXPL 10 HIGH FRAME) </h3>
-                        <p class="price">₹18,999 </p>
+                        <h3>ROCKRIDER MTB (EXPL 10 HIGH FRAME)</h3>
+                        <p class="price">₹18,999</p>
                     </div>
                     <div class="product-card">
                         <a href="cycle12.html"><img src="img90.png" alt="Rockrider MTB ST30"></a>
                         <h3>ROCKRIDER MTB (ST30)</h3>
-                        <p class="price">₹19,999 </p>
+                        <p class="price">₹19,999</p>
                     </div>
                     <div id="thirty" class="product-card">
                         <a href="cycle1.html"><img src="img5.png" alt="Rockrider EXPL 10 Low Frame Single-Speed Bicycle"></a>
-                        <h3>ROCKRIDER Rockrider EXPL 10 Low Frame Single-Speed Bicycle - Green</h3>
-                        <p class="price">₹28,999 </p>
+                        <h3>ROCKRIDER EXPL 10 LOW FRAME SINGLE-SPEED</h3>
+                        <p class="price">₹28,999</p>
                     </div>
                     <div id="thirtyone" class="product-card">
-                        <a href="cycle2.html"><img src="img6.png" alt="Rockrider Explore 40 8-Gear Disc Brake All Terrain Mountain Bike"></a>
-                        <h3>ROCKRIDER Rockrider Explore 40 8-Gear Disc Brake All Terrain Mountain</h3>
-                        <p class="price">₹39,999 </p>
+                        <a href="cycle2.html"><img src="img6.png" alt="Rockrider Explore 40"></a>
+                        <h3>ROCKRIDER EXPLORE 40 ALL TERRAIN</h3>
+                        <p class="price">₹39,999</p>
                     </div>
                     <div id="thirtytwo" class="product-card">
-                        <a href="cycle3.html"><img src="img7.png" alt="Rockrider EXPL 10 High Frame Single-Speed Bicycle"></a>
-                        <h3>ROCKRIDER Rockrider EXPL 10 High Frame Single-Speed Bicycle</h3>
-                        <p class="price">₹48,999 </p>
+                        <a href="cycle3.html"><img src="img7.png" alt="Rockrider EXPL 10 High Frame"></a>
+                        <h3>ROCKRIDER EXPL 10 HIGH FRAME</h3>
+                        <p class="price">₹48,999</p>
                     </div>
                 </div>
             </main>
         </div>
-        <div class="copyright">
-            <center>
-                <p1>© 2026 Shashwat Singh. All rights reserved.</p1>
-            </center>
-        </div>
+    </div>
+
+    <div class="copyright">
+        <p>© 2026 Shashwat Singh. All rights reserved.</p>
     </div>
 </body>
 </html>

@@ -1,230 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subscription Registration</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none !important;
+            text-shadow: none !important;
+            outline: none;
+        }
 
-    body {
-      background-color: #f7f9fa;
-      color: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
+        :root {
+            --bg-main: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --border-subtle: #E2E5EC;
+            --border-strong: #111318;
+            --text-primary: #111318;
+            --text-muted: #5E6470;
+            --accent-pink: #D81B60;
+            --accent-pink-soft: #FCE4EC;
+        }
 
-    .container {
-      background: #ffffff;
-      border: 1px solid #e1e4e8;
-      border-radius: 12px;
-      padding: 32px;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-    }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    .sub-status {
-      display: none;
-      background-color: #e6f4ea;
-      border: 1px solid #ceead6;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 24px;
-    }
+        .container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 32px;
+            max-width: 480px;
+            width: 100%;
+        }
 
-    .sub-status.active {
-      display: block;
-    }
+        .sub-status {
+            display: none;
+            background-color: var(--accent-pink-soft);
+            border: 1px solid var(--accent-pink);
+            padding: 16px;
+            margin-bottom: 24px;
+        }
 
-    .sub-status h3 {
-      color: #137333;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
+        .sub-status.active {
+            display: block;
+        }
 
-    .sub-status p {
-      color: #1e8e3e;
-      font-size: 14px;
-    }
+        .sub-status h3 {
+            color: var(--accent-pink);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
 
-    .section {
-      margin-bottom: 24px;
-    }
+        .sub-status p {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
 
-    .section h2 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #000;
-    }
+        .section {
+            margin-bottom: 24px;
+        }
 
-    .field-group {
-      margin-bottom: 16px;
-    }
+        .section h2 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
 
-    .field-group:last-child {
-      margin-bottom: 0;
-    }
+        .field-group {
+            margin-bottom: 16px;
+        }
 
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 6px;
-      color: #333;
-    }
+        label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
 
-    input, select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s ease;
-      background-color: #fff;
-    }
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 2px;
+            font-size: 0.95rem;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
 
-    input:focus, select:focus {
-      border-color: #000;
-    }
+        input:focus, select:focus {
+            border-color: var(--border-strong);
+            background-color: var(--bg-card);
+        }
 
-    input[readonly] {
-      background-color: #eef1f5;
-      color: #555;
-      cursor: not-allowed;
-    }
+        input[readonly] {
+            background-color: var(--border-subtle);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
 
-    .card-box {
-      border: 1px solid #e1e4e8;
-      border-radius: 8px;
-      padding: 16px;
-      background-color: #fff;
-    }
+        .card-box {
+            border: 1px solid var(--border-subtle);
+            padding: 16px;
+            background-color: var(--bg-main);
+        }
 
-    .card-number-wrapper {
-      position: relative;
-    }
+        .card-number-wrapper {
+            position: relative;
+        }
 
-    .card-brands {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 4px;
-    }
+        .card-brands {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 4px;
+        }
 
-    .brand-tag {
-      font-size: 10px;
-      font-weight: bold;
-      background: #f0f0f0;
-      padding: 2px 4px;
-      border-radius: 3px;
-      color: #555;
-    }
+        .brand-tag {
+            font-size: 10px;
+            font-weight: 700;
+            background: var(--bg-card);
+            padding: 2px 4px;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+        }
 
-    .card-grid {
-      display: flex;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
+        .card-grid {
+            display: flex;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
+            margin-bottom: 16px;
+        }
 
-    .card-grid input {
-      border: none;
-      border-radius: 0;
-    }
+        .card-grid input {
+            border: none;
+            background: transparent;
+        }
 
-    .card-grid .top-input {
-      border-bottom: 1px solid #ccc;
-    }
+        .top-input {
+            border-bottom: 1px solid var(--border-subtle) !important;
+            border-radius: 0 !important;
+        }
 
-    .card-grid .half-input {
-      width: 50%;
-    }
+        .half-input {
+            width: 50%;
+        }
 
-    .card-grid .half-input:first-child {
-      border-right: 1px solid #ccc;
-    }
+        .half-input:first-child {
+            border-right: 1px solid var(--border-subtle);
+        }
 
-    .pay-btn {
-      width: 100%;
-      background-color: #000;
-      color: #fff;
-      padding: 14px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
+        .pay-btn {
+            width: 100%;
+            background-color: #111318;
+            color: #FFFFFF;
+            padding: 14px;
+            border: none;
+            border-radius: 2px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
 
-    .pay-btn:hover {
-      background-color: #222;
-    }
+        .pay-btn:hover {
+            background-color: var(--accent-pink);
+        }
 
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: #fff;
-    }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 14, 17, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+        }
 
-    .overlay.active {
-      display: flex;
-    }
+        .overlay.active {
+            display: flex;
+        }
 
-    .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-      margin-bottom: 16px;
-    }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
-    .progress-bar-bg {
-      width: 200px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 3px;
-      margin-top: 16px;
-      overflow: hidden;
-    }
+        .progress-bar-bg {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            margin-top: 16px;
+            overflow: hidden;
+        }
 
-    .progress-bar-fill {
-      width: 0%;
-      height: 100%;
-      background: #fff;
-      transition: width 0.1s linear;
-    }
-  </style>
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: #fff;
+            transition: width 0.1s linear;
+        }
+    </style>
 </head>
 <body>
 
@@ -259,9 +277,9 @@
         <h2>Payment method</h2>
         <div class="card-box">
           <label>Card</label>
-          <div class="field-group">
-            <label style="font-size: 12px; color: #666;">Card information</label>
-            <div style="border: 1px solid #ccc; border-radius: 6px; overflow: hidden;">
+          <div class="field-group" style="margin-top: 8px;">
+            <label style="font-size: 11px;">Card information</label>
+            <div style="border: 1px solid var(--border-subtle); background: var(--bg-card);">
               <div class="card-number-wrapper">
                 <input type="text" id="cardNumber" class="top-input" placeholder="1234 1234 1234 1234" maxlength="19" required>
                 <div class="card-brands">
@@ -299,7 +317,7 @@
 
   <div id="loadingOverlay" class="overlay">
     <div class="spinner"></div>
-    <h2 style="font-size: 20px; font-weight: 500;">Buying subscription...</h2>
+    <h2 style="font-size: 1rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;">Buying subscription...</h2>
     <div class="progress-bar-bg">
       <div id="progressFill" class="progress-bar-fill"></div>
     </div>
@@ -322,9 +340,6 @@
           daysText.textContent = `You have ${diffDays} day(s) left on your active subscription.`;
         } else {
           statusDiv.classList.add('active');
-          statusDiv.style.backgroundColor = '#fce8e6';
-          statusDiv.style.borderColor = '#fad2cf';
-          daysText.style.color = '#c5221f';
           daysText.textContent = 'Your subscription has expired. Please renew below.';
         }
       }

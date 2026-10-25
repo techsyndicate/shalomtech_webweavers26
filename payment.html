@@ -1,38 +1,206 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Checkout Payment</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none !important;
+            text-shadow: none !important;
+            outline: none;
+        }
+
+        :root {
+            --bg-main: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --border-subtle: #E2E5EC;
+            --border-strong: #111318;
+            --text-primary: #111318;
+            --text-muted: #5E6470;
+            --accent-pink: #D81B60;
+            --accent-pink-soft: #FCE4EC;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .a {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 32px;
+            max-width: 480px;
+            width: 100%;
+        }
+
+        .b {
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            margin-top: 24px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 2px;
+            font-size: 0.95rem;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--border-strong);
+            background-color: var(--bg-card);
+        }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .c {
+            border: 1px solid var(--border-subtle);
+            padding: 16px;
+            background: var(--bg-main);
+            margin-bottom: 16px;
+        }
+
+        .d {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .e {
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
+            margin-bottom: 12px;
+        }
+
+        .f {
+            position: relative;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .f input {
+            border: none;
+            background: transparent;
+        }
+
+        .g {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .h {
+            display: flex;
+        }
+
+        .h input {
+            border: none;
+            background: transparent;
+            width: 50%;
+        }
+
+        .h input:first-child {
+            border-right: 1px solid var(--border-subtle);
+        }
+
+        .k {
+            width: 100%;
+            background-color: #111318;
+            color: #FFFFFF;
+            padding: 14px;
+            border: none;
+            border-radius: 2px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: background 0.15s ease;
+        }
+
+        .k:hover {
+            background-color: var(--accent-pink);
+        }
+
+        .m {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .m h1 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .m p {
+            color: var(--text-muted);
+        }
+    </style>
 </head>
 
 <body>
-
     <div class="a">
-
         <form id="payment-form" onsubmit="handlePayment(event)">
-
             <div class="b" style="margin-top: 0;">Contact information</div>
-
             <div style="margin-bottom: 20px;">
                 <label for="email">Email</label>
                 <input type="email" id="email" placeholder="email@example.com" required>
             </div>
 
             <div class="b">Delivery Address</div>
-
             <div style="margin-bottom: 20px;">
                 <label for="address">Full Address</label>
                 <textarea id="address" placeholder="House/Flat No., Street, Area, City, Pincode" required></textarea>
             </div>
 
             <div class="b">Select your cycle</div>
-
             <div id="cycle-image-container" style="margin-bottom: 15px; text-align: center; display: none;">
-                <img id="cycle-preview-img" src="" alt="Cycle Preview" style="width: 320px; height: 200px; object-fit: contain; border-radius: 5px; border: 1px solid #ddd; padding: 4px; background: #fff;">
+                <img id="cycle-preview-img" src="" alt="Cycle Preview" style="width: 100%; max-height: 180px; object-fit: contain; border: 1px solid var(--border-subtle); padding: 8px; background: #fff;">
             </div>
-
             <div style="margin-bottom: 20px;">
                 <label for="cycle-select">Choose cycle type</label>
                 <select id="cycle-select" onchange="updatePrice()" required>
@@ -53,14 +221,12 @@
             </div>
 
             <div class="b">Payment Amount</div>
-
             <div style="margin-bottom: 20px;">
                 <label for="amount">Amount (₹)</label>
                 <input type="text" id="amount" placeholder="Amount will appear here" readonly required>
             </div>
 
             <div class="b">Payment method</div>
-
             <div style="margin-bottom: 15px;">
                 <label for="payment-method-select">Choose Payment Method</label>
                 <select id="payment-method-select" onchange="togglePaymentMethod()" required>
@@ -70,30 +236,21 @@
             </div>
 
             <div class="c" id="card-fields">
-
-                <div class="d">
-                    Card
-                </div>
-
+                <div class="d">Card</div>
                 <label>Card information</label>
-
                 <div class="e">
-
                     <div class="f">
                         <input type="text" class="card-input" placeholder="1234 1234 1234 1234" maxlength="19" oninput="this.value = this.value.replace(/[^0-9\s]/g, '')" required>
-
                         <div class="g">
                             <span>VISA</span>
                             <span>MC</span>
                             <span>AMEX</span>
                         </div>
                     </div>
-
                     <div class="h">
                         <input type="text" class="card-input" placeholder="MM / YY" maxlength="7" required>
                         <input type="text" class="card-input" placeholder="CVC" maxlength="4" oninput="this.value = this.value.replace(/\D/g, '')" required>
                     </div>
-
                 </div>
 
                 <div style="margin-bottom: 12px;">
@@ -103,7 +260,6 @@
 
                 <div>
                     <label>Country or region</label>
-
                     <select>
                         <option value="IN">India</option>
                         <option value="US">United States</option>
@@ -112,22 +268,19 @@
                         <option value="AU">Australia</option>
                     </select>
                 </div>
-
             </div>
 
-            <div id="cod-fields" style="display: none; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; margin-bottom: 15px;">
-                <p style="margin: 0; color: #333; font-weight: 500;">Pay with cash upon delivery of your item.</p>
+            <div id="cod-fields" style="display: none; padding: 16px; border: 1px solid var(--border-subtle); background: var(--bg-card); margin-bottom: 15px;">
+                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Pay with cash upon delivery of your item.</p>
             </div>
 
             <button type="submit" class="k" id="submit-btn">Pay</button>
-
         </form>
 
         <div id="message-screen" class="m">
             <h1 id="status-heading">Processing Payment...</h1>
             <p id="status-text">Please wait while we process your secure payment.</p>
         </div>
-
     </div>
 
     <script>
@@ -221,7 +374,6 @@
 
             const existingOrders = JSON.parse(localStorage.getItem('ordersList')) || [];
             existingOrders.push(newOrder);
-
             localStorage.setItem('ordersList', JSON.stringify(existingOrders));
 
             document.getElementById('payment-form').style.display = 'none';
@@ -244,15 +396,12 @@
                 setTimeout(() => {
                     heading.innerText = "Payment Done!";
                     text.innerText = "Redirecting to your order summary...";
-
                     setTimeout(() => {
                         window.location.href = "oder.html";
                     }, 2000);
-
                 }, 3000);
             }
         }
     </script>
-
 </body>
 </html>

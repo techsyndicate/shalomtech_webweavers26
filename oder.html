@@ -3,74 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders — Riders Avenue</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="2.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-
-    <title>Order Summary</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none !important;
+            text-shadow: none !important;
+            outline: none;
+        }
+
+        :root {
+            --bg-main: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --border-subtle: #E2E5EC;
+            --border-strong: #111318;
+            --text-primary: #111318;
+            --text-muted: #5E6470;
+            --text-subtle: #8C92A0;
+            --accent-pink: #D81B60;
+            --accent-pink-soft: #FCE4EC;
+        }
+
         body {
-            background-color: #ffffff;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .two {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-nav);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(8px);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 32px;
+        }
+
+        .five {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.15s ease;
+        }
+
+        .five:hover, .five.active {
+            color: var(--text-primary);
+        }
+
+        .three {
+            background-color: #111318;
+            color: #FFFFFF;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .three h1 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #D1D5DB;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .six {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background-color: #FFFFFF;
+            color: #111318;
+            padding: 8px 16px;
+            border-radius: 2px;
+            transition: background-color 0.15s ease;
+        }
+
+        .six:hover {
+            background-color: var(--accent-pink-soft);
+            color: var(--accent-pink);
+        }
+
+        .main-container {
+            max-width: 1280px;
+            margin: 40px auto 80px auto;
+            padding: 0 24px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 32px;
+            text-align: left;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .order-headers {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 12px 16px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 20px;
+        }
+
+        .order-row {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            padding: 16px;
+            align-items: center;
         }
 
         .order-wrapper {
-            margin-bottom: 25px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #fff;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-subtle);
+            background-color: var(--bg-card);
         }
 
         .product-preview-box {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
-            background-color: #ffffff;
-            padding: 12px;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            gap: 20px;
+            background-color: var(--bg-main);
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .product-preview-box img {
-            width: 90px;
+            width: 80px;
             height: 60px;
             object-fit: contain;
-            border-radius: 5px;
-            background: #fff;
+            background: #FFFFFF;
             padding: 4px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .product-preview-details {
-            text-align: left;
+            border: 1px solid var(--border-subtle);
         }
 
         .product-preview-title {
-            font-size: 0.8em;
-            color: #666;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
         }
 
         .product-preview-name {
-            font-size: 1.05em;
-            font-weight: bold;
-            color: #222;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-transform: uppercase;
         }
 
         .progress-section {
             width: 100%;
-            padding: 15px 0 10px 0;
-            background-color: #f9f9f9;
+            padding: 20px 24px;
+            background-color: var(--bg-card);
         }
 
         .progress-track-wrapper {
             position: relative;
-            width: 85%;
-            margin: 0 auto;
+            width: 100%;
             display: flex;
             align-items: center;
         }
@@ -78,17 +214,17 @@
         .progress-bar-container {
             position: relative;
             flex-grow: 1;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            height: 12px;
-            margin-right: 15px;
+            background-color: var(--border-subtle);
+            border-radius: 2px;
+            height: 8px;
+            margin-right: 20px;
         }
 
         .progress-bar-fill {
             height: 100%;
-            background-color: #4caf50;
+            background-color: var(--accent-pink);
             width: 0%;
-            border-radius: 10px;
+            border-radius: 2px;
             transition: width 0.5s ease;
         }
 
@@ -96,34 +232,101 @@
             position: absolute;
             top: 50%;
             transform: translate(-50%, -50%);
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             object-fit: contain;
             transition: left 0.5s ease;
             z-index: 2;
         }
 
         .home-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             object-fit: contain;
         }
 
         .progress-text {
-            font-size: 0.85em;
-            margin-top: 8px;
-            font-weight: bold;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 12px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            padding: 0 24px;
+            background-color: #111318;
+            color: #FFFFFF;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-pink);
+        }
+
+        .btn-clear {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-clear:hover {
+            background-color: var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        .copyright {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-subtle);
+            padding: 32px 24px;
             text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+            letter-spacing: 0.05em;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 1024px) {
+            .order-headers, .order-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .order-headers {
+                display: none;
+            }
+            .order-row {
+                padding: 16px;
+                border-bottom: 1px solid var(--border-subtle);
+            }
         }
     </style>
 </head>
 
 <body>
-
     <div class="two">
         <a class="five" href="index.html">HOME</a>
         <a class="five" href="shop.html">SHOP NOW</a>
-        <a class="five" href="oder.html">ORDERS</a>
+        <a class="five active" href="oder.html">ORDERS</a>
     </div>
 
     <div class="three">
@@ -131,9 +334,7 @@
         <a class="six" href="register.html">CLICK HERE</a>
     </div>
 
-    <br><br>
-
-    <center>
+    <div class="main-container">
         <div class="card">
             <h2>Order Details</h2>
 
@@ -144,7 +345,7 @@
                 <div class="col">Amount</div>
                 <div class="col">Date</div>
                 <div class="col">Time</div>
-                <div class="col">Expected / Actual Delivery</div>
+                <div class="col">Expected Delivery</div>
             </div>
 
             <div class="orders-container" id="orders-container"></div>
@@ -154,7 +355,11 @@
                 <button onclick="clearOrders()" class="btn btn-clear">Clear History</button>
             </div>
         </div>
-    </center>
+    </div>
+
+    <div class="copyright">
+        <p>© 2026 Shashwat Singh. All rights reserved.</p>
+    </div>
 
     <script>
         const bikeNames = {
@@ -200,7 +405,7 @@
             container.innerHTML = '';
 
             if (orders.length === 0) {
-                container.innerHTML = '<div style="padding: 20px; color: #888;">No orders found.</div>';
+                container.innerHTML = '<div style="padding: 20px; color: #5E6470; font-size: 0.88rem;">No orders found.</div>';
                 return;
             }
 
@@ -331,6 +536,5 @@
             location.reload();
         }
     </script>
-
 </body>
 </html>
